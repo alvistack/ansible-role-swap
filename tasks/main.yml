@@ -79,12 +79,6 @@
     state: "present"
   tags: swap
 
-- name: enable swap file
-  command: swapon -a
-  register: result
-  changed_when: result is not succeeded
-  tags: swap
-
 - name: sysctl -p
   sysctl:
     name: "vm.swappiness"
