@@ -70,16 +70,10 @@
   ignore_errors: true
   tags: swap
 
-- name: enable swap file
-  command: swapon {{ swap_file }}
-  register: result
-  changed_when: result is not succeeded
-  tags: swap
-
 - name: mount swap with /etc/fstab
   mount:
-    path: "{{ swap_file }}"
-    src: none
+    src: "{{ swap_file }}"
+    path: none
     fstype: "swap"
     opts: "sw"
     state: "present"
