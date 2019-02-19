@@ -72,8 +72,8 @@
 
 - name: mount swap with /etc/fstab
   mount:
-    path: "{{ swap_file }}"
-    src: none
+    src: "{{ swap_file }}"
+    path: none
     fstype: "swap"
     opts: "sw"
     state: "present"
