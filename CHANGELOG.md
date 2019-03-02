@@ -4,6 +4,8 @@
 
 ### Major Changes
 
+  - Remove CentOS 6 support
+
 ## 2.3.7 - 2019-02-19
 
   - Initial release for Ansible 2.6 or higher
