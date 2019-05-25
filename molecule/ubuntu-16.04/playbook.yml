@@ -16,11 +16,13 @@
 
 - hosts: all
   remote_user: root
+  become: true
   roles:
     - role: swap
 
 - hosts: all
   remote_user: root
+  become: true
   tasks:
     - name: swapon -a
       command: swapon -a
