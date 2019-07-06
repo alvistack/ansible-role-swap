@@ -63,7 +63,7 @@
     group: "{{ item.group | default('root') }}"
     mode: "{{ item.mode | default('0644') }}"
     state: "{{ item.state | default('file') }}"
-  with_items:
+  loop:
     - { dest: "{{ swap_file }}", mode: "0600" }
   tags: swap
 
