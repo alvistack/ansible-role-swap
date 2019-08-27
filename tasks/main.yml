@@ -94,11 +94,19 @@
     state: "present"
   tags: swap
 
-- name: tweak sysctl entires
-  sysctl:
-    sysctl_file: "{{ item.sysctl_file }}"
-    name: "{{ item.name }}"
-    value: "{{ item.value | default(None) or omit }}"
+- name: tweak sysctl entries
+  lineinfile:
+    path: "/etc/sysctl.d/50-swap.conf"
+    line: "{{ item.line }}"
+    regexp: "{{ item.regexp | default('^' + item.line | regex_escape() + '$') }}"
     state: "{{ item.state | default('present') }}"
+    insertafter: "EOF"
+    create: true
   loop: "{{ swap_sysctl }}"
+  notify:
+    - swap | sysctl --system
+  tags: swap
+
+- name: flush handlers
+  meta: flush_handlers
   tags: swap
