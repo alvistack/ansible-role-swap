@@ -48,6 +48,17 @@
   ignore_errors: true
   tags: swap
 
+- name: prepare directories
+  file:
+    dest: "{{ item.dest }}"
+    owner: "{{ item.owner | default('root') }}"
+    group: "{{ item.group | default('root') }}"
+    mode: "{{ item.mode | default('0755') }}"
+    state: "{{ item.state | default('directory') }}"
+  loop:
+    - { dest: "/etc/sysctl.d" }
+  tags: swap
+
 - name: create swap file if not exists
   command: fallocate -l {{ swap_size }} {{ swap_file }}
   args:
@@ -83,9 +94,11 @@
     state: "present"
   tags: swap
 
-- name: sysctl -p
+- name: tweak sysctl entires
   sysctl:
-    name: "vm.swappiness"
-    value: "{{ swap_swappiness }}"
-    state: "present"
+    sysctl_file: "{{ item.sysctl_file }}"
+    name: "{{ item.name }}"
+    value: "{{ item.value | default(None) or omit }}"
+    state: "{{ item.state | default('present') }}"
+  loop: "{{ swap_sysctl }}"
   tags: swap

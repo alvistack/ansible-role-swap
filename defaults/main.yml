@@ -20,5 +20,6 @@ swap_file: "/swapfile"
 # Swap file size in fallocate length format.
 swap_size: "2G"
 
-# `vm.swappiness` for sysctl.
-swap_swappiness: "0"
+# Entries for sysctl.
+swap_sysctl:
+  - { sysctl_file: "/etc/sysctl.d/50-swap.conf", state: "present", name: "vm.swappiness", value: "0" }
