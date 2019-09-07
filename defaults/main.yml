@@ -20,5 +20,6 @@ swap_file: "/swapfile"
 # Swap file size in fallocate length format.
 swap_size: "2G"
 
-# `vm.swappiness` for sysctl.
-swap_swappiness: "0"
+# Entries for sysctl.
+swap_sysctl:
+  - { state: "present", line: "vm.swappiness = 0" }
