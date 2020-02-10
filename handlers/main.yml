@@ -15,10 +15,6 @@
 # limitations under the License.
 
 - name: swap | sysctl --system
-  shell: |
-    set -o pipefail
-    sysctl --system
-  args:
-    executable: "/bin/bash"
+  command: sysctl --system
   changed_when: false
   ignore_errors: true
