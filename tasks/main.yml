@@ -49,8 +49,13 @@
   tags: swap
 
 - name: create swap file if not exists
-  command: fallocate -l {{ swap_size }} {{ swap_file }}
+  shell: |
+    set -o pipefail
+    touch {{ swap_file }}
+    fallocate -z -l {{ swap_size }} {{ swap_file }}
+    chmod 0600 {{ swap_file }}
   args:
+    executable: "/bin/bash"
     creates: "{{ swap_file }}"
   register: result
   changed_when: result is not succeeded
@@ -68,10 +73,9 @@
   tags: swap
 
 - name: format swap file
-  command: mkswap {{ swap_file }}
-  register: result
-  changed_when: result is not succeeded
-  ignore_errors: true
+  filesystem:
+    dev: "{{ swap_file }}"
+    fstype: "swap"
   tags: swap
 
 - name: mount swap with /etc/fstab
@@ -84,17 +88,9 @@
   tags: swap
 
 - name: tweak sysctl entries
-  lineinfile:
-    path: "/etc/sysctl.conf"
-    line: "{{ item.line }}"
-    regexp: "{{ item.regexp | default('^' + item.line | regex_escape() + '$') }}"
-    state: "{{ item.state | default('present') }}"
-    insertafter: "EOF"
+  sysctl:
+    name: "{{ item.name }}"
+    value: "{{ item.value }}"
+    state: "{{ item.state }}"
   loop: "{{ swap_sysctl }}"
-  notify:
-    - swap | sysctl --system
-  tags: swap
-
-- name: flush handlers
-  meta: flush_handlers
   tags: swap

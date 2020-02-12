@@ -22,4 +22,4 @@ swap_size: "2G"
 
 # Entries for sysctl.
 swap_sysctl:
-  - { state: "present", line: "vm.swappiness = 0", regexp: "^\\s*vm.swappiness\\s*=\\s*" }
+  - { state: "present", name: "vm.swappiness", value: "0" }
