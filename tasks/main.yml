@@ -91,6 +91,6 @@
   sysctl:
     name: "{{ item.name }}"
     value: "{{ item.value }}"
-    state: "{{ item.state }}"
+    state: "{{ item.state | default('present') }}"
   loop: "{{ swap_sysctl }}"
   tags: swap
