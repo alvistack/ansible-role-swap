@@ -19,24 +19,3 @@
   become: true
   roles:
     - role: swap
-
-- hosts: all
-  remote_user: root
-  become: true
-  tasks:
-    - name: swapon -a
-      command: swapon -a
-      register: result
-      changed_when: result is not succeeded
-      ignore_errors: true
-
-    - name: swapon -s
-      command: swapon -s
-      register: result
-      changed_when: result is not succeeded
-
-    - name: swapoff -a
-      command: swapoff -a
-      register: result
-      changed_when: result is not succeeded
-      ignore_errors: true
