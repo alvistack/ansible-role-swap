@@ -1,6 +1,6 @@
 # Ansible Role for Swap
 
-[![Travis](https://img.shields.io/travis/alvistack/ansible-role-swap.svg)](https://travis-ci.org/alvistack/ansible-role-swap)
+[![Travis](https://img.shields.io/travis/com/alvistack/ansible-role-swap.svg)](https://travis-ci.com/alvistack/ansible-role-swap)
 [![GitHub release](https://img.shields.io/github/release/alvistack/ansible-role-swap.svg)](https://github.com/alvistack/ansible-role-swap)
 [![GitHub license](https://img.shields.io/github/license/alvistack/ansible-role-swap.svg)](https://github.com/alvistack/ansible-role-swap/blob/master/LICENSE)
 [![Ansible Role](https://img.shields.io/badge/galaxy-alvistack.swap-blue.svg)](https://galaxy.ansible.com/alvistack/swap)
