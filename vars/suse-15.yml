@@ -15,4 +15,5 @@
 # limitations under the License.
 
 _zypper:
+  - { state: "latest", name: "procps" }
   - { state: "latest", name: "util-linux" }

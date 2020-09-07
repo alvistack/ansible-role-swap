@@ -15,4 +15,5 @@
 # limitations under the License.
 
 _yum:
+  - { state: "latest", name: "procps-ng" }
   - { state: "latest", name: "util-linux" }
