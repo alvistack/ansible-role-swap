@@ -22,3 +22,23 @@
   register: result
   until: result is succeeded
   tags: swap
+
+- name: yum install procps-ng
+  yum:
+    name: "procps-ng"
+    state: "present"
+  register: result
+  until: result is succeeded
+  tags: swap
+
+- name: tweak sysctl entries
+  sysctl:
+    name: "{{ item.name }}"
+    value: "{{ item.value }}"
+    state: "{{ item.state }}"
+    sysctl_file: "/etc/sysctl.conf"
+    reload: false
+  loop: "{{ swap_sysctl }}"
+  notify:
+    - swap | sysctl --system
+  tags: swap
