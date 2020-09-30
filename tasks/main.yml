@@ -16,7 +16,6 @@
 
 - name: include default variables
   include_vars: "../vars/main.yml"
-  tags: swap
 
 - name: include release specific variables
   include_vars: "{{ lookup('first_found', _params) }}"
@@ -31,7 +30,6 @@
       paths:
         - "../vars"
   ignore_errors: true
-  tags: swap
 
 - name: include release specific tasks
   include_tasks: "{{ lookup('first_found', _params) }}"
@@ -46,7 +44,6 @@
       paths:
         - "."
   ignore_errors: true
-  tags: swap
 
 - name: create swap file if not exists
   shell: |
@@ -59,7 +56,6 @@
     creates: "{{ swap_file }}"
   register: result
   changed_when: result is not succeeded
-  tags: swap
 
 - name: prepare files
   file:
@@ -70,13 +66,11 @@
     state: "{{ item.state | default('file') }}"
   loop:
     - { dest: "{{ swap_file }}", mode: "0600" }
-  tags: swap
 
 - name: format swap file
   filesystem:
     dev: "{{ swap_file }}"
     fstype: "swap"
-  tags: swap
 
 - name: mount swap with /etc/fstab
   mount:
@@ -85,7 +79,6 @@
     fstype: "swap"
     opts: "sw"
     state: "present"
-  tags: swap
 
 - name: tweak sysctl entries
   sysctl:
@@ -97,8 +90,6 @@
   loop: "{{ swap_sysctl }}"
   notify:
     - swap | sysctl --system
-  tags: swap
 
 - name: flush handlers
   meta: flush_handlers
-  tags: swap
