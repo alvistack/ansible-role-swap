@@ -22,7 +22,7 @@
       command: swapon -a
       register: result
       changed_when: result is not succeeded
-      ignore_errors: true
+      failed_when: false
 
     - name: swapon -s
       command: swapon -s
@@ -33,4 +33,4 @@
       command: swapoff -a
       register: result
       changed_when: result is not succeeded
-      ignore_errors: true
+      failed_when: false

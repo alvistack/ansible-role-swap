@@ -17,4 +17,4 @@
 - name: swap | sysctl --system
   command: sysctl --system
   changed_when: false
-  ignore_errors: true
+  failed_when: false
