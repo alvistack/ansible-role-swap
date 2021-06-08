@@ -55,7 +55,7 @@
 
 - name: create swap file if not exists
   shell: |
-    set -euo pipefail
+    set -euxo pipefail
     touch {{ swap_file }}
     fallocate -z -l {{ swap_size }} {{ swap_file }}
     chmod 0600 {{ swap_file }}
