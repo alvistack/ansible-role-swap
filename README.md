@@ -1,5 +1,7 @@
 # Ansible Role for Swap
 
+<img src="/alvistack.svg" width="75" alt="AlviStack">
+
 [![Gitlab pipeline status](https://img.shields.io/gitlab/pipeline/alvistack/ansible-role-swap/master)](https://gitlab.com/alvistack/ansible-role-swap/-/pipelines)
 [![GitHub release](https://img.shields.io/github/release/alvistack/ansible-role-swap.svg)](https://github.com/alvistack/ansible-role-swap/releases)
 [![GitHub license](https://img.shields.io/github/license/alvistack/ansible-role-swap.svg)](https://github.com/alvistack/ansible-role-swap/blob/master/LICENSE)
