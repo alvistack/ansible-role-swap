@@ -15,10 +15,10 @@
 # limitations under the License.
 
 - name: include default variables
-  include_vars: "../vars/main.yml"
+  ansible.builtin.include_vars: "../vars/main.yml"
 
 - name: include release specific variables
-  include_vars: "{{ _loop_var }}"
+  ansible.builtin.include_vars: "{{ _loop_var }}"
   loop: "{{ query('first_found', _params) }}"
   loop_control:
     loop_var: _loop_var
@@ -54,7 +54,7 @@
       skip: true
 
 - name: create swap file if not exists
-  shell: |
+  ansible.builtin.shell: |
     set -euxo pipefail
     touch {{ swap_file }}
     fallocate -z -l {{ swap_size }} {{ swap_file }}
@@ -66,10 +66,10 @@
   changed_when: result is not succeeded
 
 - name: prepare files
-  file:
+  ansible.builtin.file:
     dest: "{{ item.dest }}"
     owner: "{{ item.owner | default('root') }}"
-    group: "{{ item.group | default('root') }}"
+    ansible.builtin.group: "{{ item.group | default('root') }}"
     mode: "{{ item.mode | default('0644') }}"
     state: "{{ item.state | default('file') }}"
   loop:
@@ -100,4 +100,4 @@
     - swap | sysctl --system
 
 - name: flush handlers
-  meta: flush_handlers
+  ansible.builtin.meta: flush_handlers
