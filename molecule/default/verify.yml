@@ -19,18 +19,18 @@
   become: true
   tasks:
     - name: swapon -a
-      command: swapon -a
+      ansible.builtin.command: swapon -a
       register: result
       changed_when: result is not succeeded
       failed_when: false
 
     - name: swapon -s
-      command: swapon -s
+      ansible.builtin.command: swapon -s
       register: result
       changed_when: result is not succeeded
 
     - name: swapoff -a
-      command: swapoff -a
+      ansible.builtin.command: swapoff -a
       register: result
       changed_when: result is not succeeded
       failed_when: false
