@@ -97,7 +97,7 @@
     reload: false
   loop: "{{ swap_sysctl }}"
   notify:
-    - swap | sysctl --system
+    - swap | systemctl restart systemd-sysctl.service
 
 - name: flush handlers
   ansible.builtin.meta: flush_handlers
