@@ -76,12 +76,12 @@
     - { dest: "{{ swap_file }}", mode: "0600" }
 
 - name: format swap file
-  filesystem:
+  community.general.filesystem:
     dev: "{{ swap_file }}"
     fstype: "swap"
 
 - name: mount swap with /etc/fstab
-  mount:
+  ansible.posix.mount:
     src: "{{ swap_file }}"
     path: none
     fstype: "swap"
@@ -89,7 +89,7 @@
     state: "present"
 
 - name: tweak sysctl entries
-  sysctl:
+  ansible.posix.sysctl:
     name: "{{ item.name }}"
     value: "{{ item.value }}"
     state: "{{ item.state }}"
