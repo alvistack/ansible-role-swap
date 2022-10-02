@@ -54,11 +54,12 @@
       skip: true
 
 - name: create swap file if not exists
-  ansible.builtin.shell: |
-    set -euxo pipefail
-    touch {{ swap_file }}
-    fallocate -z -l {{ swap_size }} {{ swap_file }}
-    chmod 0600 {{ swap_file }}
+  ansible.builtin.shell:
+    cmd: |
+      set -euxo pipefail
+      touch {{ swap_file }}
+      fallocate -z -l {{ swap_size }} {{ swap_file }}
+      chmod 0600 {{ swap_file }}
   args:
     executable: "/bin/bash"
     creates: "{{ swap_file }}"
