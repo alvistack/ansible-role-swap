@@ -15,11 +15,11 @@
 # limitations under the License.
 
 # Swap file location. Support block device.
-swap_file: "/swapfile"
+swap_file: /swapfile
 
 # Swap file size in fallocate length format.
-swap_size: "2G"
+swap_size: 2G
 
 # Entries for sysctl.
 swap_sysctl:
-  - { state: "present", name: "vm.swappiness", value: "0" }
+  - { state: present, name: vm.swappiness, value: "0" }
