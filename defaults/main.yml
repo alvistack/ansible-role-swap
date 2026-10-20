@@ -22,4 +22,4 @@ swap_size: 2G
 
 # Entries for sysctl.
 swap_sysctl:
-  - { state: present, name: vm.swappiness, value: "0" }
+  - { state: present, name: vm.swappiness, value: "1" }
